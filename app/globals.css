@@ -1,27 +1,72 @@
+@import "fonts.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+
+.homePage__bg {
+    background-image: url("../public/background.jpg");
+    background-size: 100% 45%;
+    background-repeat: no-repeat;
+}
+.formContainer__bg {
+    background: linear-gradient(45deg, #f1f1f1, #fff, #f1f1f1);
+}
+.btn__bg{
+    background: #a6b33d;
+}
+.form__textColor{
+    color: #165a3d !important;
+}
+.input__bg {
+    background-color: #e8e8e8 !important;
+}
+.checkbox {
+    position: relative;
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    background-color: #e8e8e8;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+
+.checkbox::after{
+    content: '';
+    position: absolute;
+    left: 8px;
+    bottom: 4px;
+    width: 8px;
+    height: 18px;
+    border: solid #848f30;
+    border-width: 0 2px 2px 0;
+    opacity: 0;
+    transform: rotate(45deg);
+    transition: 0.3s;
+}
+
+.checkbox:checked::after {
+   opacity: 1;
+}
+@media (max-width: 600px) {
+    .checkbox {
+
+        width: 22px;
+        height: 16px;
+
+    }
+    .checkbox::after{
+        left: 8px;
+        bottom: 12px;
+        width: 8px;
+        height: 18px;
+
+    }
+
 }
