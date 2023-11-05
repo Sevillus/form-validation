@@ -10,6 +10,8 @@ const UseForm = () => {
     const [mailAgreement, setMailAgreement] = useState(false)
     const [callAgreement, setCallAgreement] = useState(false)
     const [smsAgreement, setSmsAgreement] = useState(false)
+    const numberRegex = /^\d{9}$/;
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 
     const resetErrors = () => {
         setNameError("");
@@ -32,32 +34,36 @@ const UseForm = () => {
         const phone = String(formData.get('phone')) ;
         formData.set('error_test', shouldSendInvalidEmail() ? "" : email);
 
-        // form validation
+
+        // name validation
         if (name === "") {
             error++;
             setNameError("Podaj imię i nazwisko!");
         }
+        // phone validation only if exists
         if (phone) {
-            const numberRegex = /^\d{9}$/;
+
             if (!numberRegex.test(phone)) {
                 error++;
                 setPhoneError("Błędny format numeru telefonu!");
             }
         }
+        // is email exists and proper format validation
         if (email === "") {
             error++;
             setEmailError("Podaj swój adres email!");
         } else {
-            const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+
             if (!emailRegex.test(email)) {
                 error++;
                 setEmailError("Błędny adres email!");
             }
         }
+
         if (!mailAgreement){
             error++
         }
-        if (!smsAgreement && !callAgreement){
+        if (!smsAgreement && !callAgreement ){
             error++
         }
 
@@ -89,7 +95,9 @@ const UseForm = () => {
         mailAgreement, setMailAgreement,
         callAgreement, setCallAgreement,
         smsAgreement, setSmsAgreement,
-        isFetched
+        isFetched,
+        numberRegex,
+        emailRegex
     };
 };
 

@@ -7,9 +7,12 @@ import AgreeText from "@/components/AgreeText";
 import FormInput from "@/components/FormInput";
 import SubmitInfo from "@/components/SubmitInfo";
 import useForm from "@/hooks/useForm";
+import {useState} from "react";
 
 const Form = () => {
-
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState('')
+    const [name, setName] = useState('')
     const {
         data,
         handleSubmit,
@@ -23,15 +26,38 @@ const Form = () => {
         smsAgreement,
         callAgreement,
         isSubmitted,
-        isFetched
+        isFetched,
+        numberRegex,
+        emailRegex
     } = useForm();
 
     return (
         <section className={"formContainer__bg w-11/12 md:w-8/12 lg:w-4/12 min-[1900px]:w-4/12 shadow-lg form__textColor"}>
             <form onSubmit={handleSubmit} className="form-group flex flex-col gap-4 min-[1900px]:px-20 px-10 py-10">
-                <FormInput placeholder={"IMIĘ I NAZWISKO"} type={"text"} name={"name"} error={nameError}/>
-                <FormInput placeholder={"TELEFON"} type={"number"} name={"phone"} error={phoneError}/>
-                <FormInput placeholder={"EMAIL"} type={"email"} name={"email"} error={emailError}/>
+                <FormInput
+                    placeholder={"IMIĘ I NAZWISKO"}
+                    type={"text"}
+                    name={"name"}
+                    error={nameError}
+                    value={name}
+                    setValue={setName}
+                />
+                <FormInput
+                    placeholder={"TELEFON"}
+                    type={"number"}
+                    name={"phone"}
+                    error={phoneError}
+                    value={phone}
+                    setValue={setPhone}
+                />
+                <FormInput
+                    placeholder={"EMAIL"}
+                    type={"email"}
+                    name={"email"}
+                    error={emailError}
+                    value={email}
+                    setValue={setEmail}
+                />
                 <AgreeText />
                 <Checkbox
                     label="w formie elektronicznej (mail) na wskazany adres mailowy"
@@ -40,6 +66,8 @@ const Form = () => {
                     setChecked={setMailAgreement}
                     isSubmitted={isSubmitted}
                     isFetched={isFetched}
+                    value={email}
+                    regex={emailRegex}
                 />
                 <Checkbox
                     label="drogą telefoniczną na udostępniony numer telefony"
@@ -48,6 +76,8 @@ const Form = () => {
                     setChecked={setCallAgreement}
                     isSubmitted={isSubmitted}
                     isFetched={isFetched}
+                    value={phone}
+                    regex={numberRegex}
                 />
                 <Checkbox
                     label="W formie SMS, na udostępniony numer telefonu"
@@ -56,6 +86,8 @@ const Form = () => {
                     setChecked={setSmsAgreement}
                     isSubmitted={isSubmitted}
                     isFetched={isFetched}
+                    value={phone}
+                    regex={numberRegex}
                 />
                 <SubmitInfo  data={data}/>
                 <SubmitButton label="Wyślij"/>

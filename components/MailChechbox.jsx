@@ -1,8 +1,7 @@
 
-const Checkbox = ({ label, name, checked, setChecked, isSubmitted, isFetched, value, regex}) => {
-
+const Checkbox = ({ label, name, checked, setChecked, isSubmitted, isFetched}) => {
     return (
-        <div className={`form-check form-check-inline text-xs montserrat font-semibold easy-in-out duration-300 ${regex.test(value) ? "opacity-1" :"opacity-0" }`}>
+        <div className="form-check form-check-inline text-xs montserrat font-semibold">
             <input
                 className={`form-check-input checkbox ${isSubmitted && (!isFetched )? 'border-2 border-rose-600' : ''}`}
                 type="checkbox"
@@ -16,7 +15,5 @@ const Checkbox = ({ label, name, checked, setChecked, isSubmitted, isFetched, va
             </label>
         </div>
     );
-
-
 };
 export default Checkbox;

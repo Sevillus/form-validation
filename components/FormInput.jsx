@@ -2,8 +2,8 @@ import {useState} from "react";
 import ErrorInfo from "@/components/ErrorInfo";
 
 
-const FormInput = ({placeholder, name, type, error}) => {
-  const [value, setValue] = useState("")
+const FormInput = ({placeholder, name, type, error, value, setValue}) => {
+
   return (
       <div>
         <input
